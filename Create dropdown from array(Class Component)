@@ -1,0 +1,57 @@
+import { Component } from "react";
+import "./styles.css";
+import { fromEvent } from "rxjs";
+import { map } from "rxjs/operators";
+
+let users = [
+  { value: "Nitesh", label: "Nitesh" },
+  { value: "Madhav", label: "Madhav" },
+  { value: "Pralay", label: "Pralay" },
+  { value: "Somnath", label: "Somnath" }
+];
+
+const filterStream = fromEvent(document, "change").pipe(
+  map((e) => e.target.value)
+);
+
+class Dropdown extends Component {
+  constructor() {
+    super();
+    this.state = {
+      selectedOption: " "
+    };
+  }
+
+  componentDidMount() {
+    this.subscription = filterStream.subscribe({
+      next: (x) => {
+        this.setState({ selectedOption: x });
+      },
+      error: (err) => console.error("Observer got an error: " + err),
+      complete: () => console.log("Observer got a complete notification")
+    });
+  }
+
+  componentWillUnmount() {
+    this.subscription.unsubscribe();
+  }
+
+  render() {
+    return (
+      <div className="App" style={{ display: "flex" }}>
+        <select id="dropdown">
+          {users.map((user) => (
+            <option
+              key={user.value}
+              value={user.label}
+              label={user.label}
+            ></option>
+          ))}
+        </select>
+        <p>Selected Option is : {this.state.selectedOption}</p>
+      </div>
+    );
+  }
+}
+
+export default Dropdown;
