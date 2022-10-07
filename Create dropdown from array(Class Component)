@@ -1,9 +1,10 @@
 import { Component } from "react";
 import "./styles.css";
 import { fromEvent } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, filter } from "rxjs/operators";
 
 let users = [
+  { value: "Select", label: "Select" },
   { value: "Nitesh", label: "Nitesh" },
   { value: "Madhav", label: "Madhav" },
   { value: "Pralay", label: "Pralay" },
@@ -11,10 +12,11 @@ let users = [
 ];
 
 const filterStream = fromEvent(document, "change").pipe(
+  filter((e) => e.target.value !== "Select"),
   map((e) => e.target.value)
 );
 
-class Dropdown extends Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -54,4 +56,4 @@ class Dropdown extends Component {
   }
 }
 
-export default Dropdown;
+export default App;
