@@ -10,7 +10,7 @@ let users = [
   { value: "Somnath", label: "Somnath" }
 ];
 
-const filterStream = fromEvent(document, "change").pipe(
+const userData = fromEvent(document, "change").pipe(
   filter((e) => e.target.value !== ""),
   map((e) => e.target.value)
 );
@@ -26,7 +26,7 @@ class RxjsDropdown extends Component {
     }
 
     componentDidMount() {
-        this.subscription = filterStream.subscribe({
+        this.subscription = userData.subscribe({
             next: (x) => {
                 this.setState({prevOption: this.state.selectedOption})
                 this.setState({ selectedOption: x });
