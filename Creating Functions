@@ -1,0 +1,29 @@
+import { Observable, of } from 'rxjs';
+
+//1st way
+of('Nitesh', 'PK', 'Om').subscribe ({
+  next: value => console.log(value),
+  complete: () => console.log('Complete')
+});
+
+// Nitesh
+PK
+Om
+Complete
+
+//2nd Way
+const names = new Observable(subscriber => {
+  subscriber.next('Pandey');
+  subscriber.next('Chaudhary');
+  subscriber.next('Chaubey');
+  subscriber.complete();
+});
+
+names.subscribe({
+  next: value => console.log(value),
+  complete: () => console.log('Completed')
+});
+// Pandey
+Chaudhary
+Chaubey
+Completed
