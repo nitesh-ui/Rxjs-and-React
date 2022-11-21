@@ -1,0 +1,24 @@
+import { from } from 'rxjs';
+
+<---- 1st Way for Array ---->
+from (['Nitesh', 'Om', 'Pappu']).subscribe({
+  next: value => console.log(value),
+  complete: () => console.log('Completed')
+});
+
+// Nitesh
+Om
+Pappu
+
+<---- 2nd Way for Promise ---->
+Observable From Promise
+const somePromise = new Promise((resolve, reject) => {
+  resolve('Resolved');
+});
+
+const observableFromPromise = from(somePromise);
+
+observableFromPromise.subscribe({
+  next: value => console.log(value),
+  complete: () => console.log('Completed');
+});
