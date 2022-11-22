@@ -1,0 +1,24 @@
+import { Observable } from 'rxjs';
+
+console.log('App Started');
+
+const interval = new Observable(subscriber => {
+  let counter = 0;
+  
+  const intervalId = setInterval(() => {
+     console.log('Timeout !');
+     subscriber.next(counter++);
+  }, 1000);
+  
+  return () => clearInterval(intervalId);
+});
+
+const subscriotion = interval.subscribe({
+   next: value => console.log(value),
+   complete: () => console.log('Completed');
+});
+
+setTimeout(() => {
+   subscription.unsubscribe();
+   console.log('Unsubscribe');
+}, 5000);
