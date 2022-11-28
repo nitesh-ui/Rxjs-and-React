@@ -1,0 +1,4 @@
+- A RxJS Subject allows values to be multicasted to many Observers.
+- While plain Observables are unicasted and Subjects are multicasted
+- Every Subject is an Observables.
+- Every Subject is an Observer.
