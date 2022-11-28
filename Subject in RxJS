@@ -4,6 +4,7 @@
 - Every Subject is an Observer.
 
 
+<---- Example 1 ---->
 import { Subject } from 'rxjs';
 
 const subject = new Subject();
@@ -23,3 +24,28 @@ subject.next(2);
 Observer B: 1
 Observer A: 2
 Observer B: 2
+
+
+
+<---- Example 2 ---->
+import { Subject, from } from 'rxjs';
+
+const subject = new Subject();
+
+subject.subscribe({
+   next: (v) => console.log(`Observer A: {$v}`)
+});
+
+subject.subscribe({
+   next: (v) => console.log(`Observer B: {$v}`)
+});
+
+const observable = from([1, 2, 3]);
+observable.subscribe(subject);
+
+// Observer A: 1
+Observer B: 1
+Observer A: 2
+Observer B: 2
+Obsever A: 3
+Observer B: 3
