@@ -7,7 +7,7 @@
 <---- Example 1 ---->
 import { Subject } from 'rxjs';
 
-const subject = new Subject();
+const subject$ = new Subject();
 
 subject.subscribe({
    next: (v) => console.log(`Observer A: {$v}`)
@@ -30,7 +30,7 @@ Observer B: 2
 <---- Example 2 ---->
 import { Subject, from } from 'rxjs';
 
-const subject = new Subject();
+const subject$ = new Subject();
 
 subject.subscribe({
    next: (v) => console.log(`Observer A: {$v}`)
